@@ -1,6 +1,7 @@
 package cloud.imail.game;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,10 +35,11 @@ public class GuessingGameTest {
         assertEquals("You didn't get it", message);
     }
 
-    @Test
+    @RepeatedTest(10)
     public void testRandomNumberGeneration() {
         int[] rndNumCount = new int[11];
-        for (int counter=0; counter < 100; counter++) {
+        for (int counter=0; counter < 50; counter++) {
+            GuessingGame game = new GuessingGame();
             int randomNum = game.getRandomNumber();
             rndNumCount[randomNum] = 1;
         }
@@ -48,4 +50,13 @@ public class GuessingGameTest {
         }
         assertEquals(10, sum);
     }
+
+    @Test
+    public void testFourWrongGuesses() {
+        game.guess(-3);
+        game.guess(-3);
+        game.guess(-3);
+        game.guess(-3);
+    }
+
 }
