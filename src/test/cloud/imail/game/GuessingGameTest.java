@@ -64,7 +64,7 @@ public class GuessingGameTest {
         makeThreeWrongGuesses();
         int correctAnswer = game.getRandomNumber();
         String message = game.guess(correctAnswer);
-        assertEquals("You got it", message);
+        assertEquals("You got it in 4 tries", message);
     }
 
     private void makeThreeWrongGuesses() {
