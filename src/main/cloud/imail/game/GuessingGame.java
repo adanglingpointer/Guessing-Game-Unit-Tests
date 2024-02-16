@@ -8,12 +8,17 @@ public class GuessingGame {
 
     public String guess(int guessedNumber) {
         counter++;
-        if (counter == 4 && guessedNumber != getRandomNumber()) {
-            return "You didn't get it and you've had four tries. Game over.";
-        }
         String tryText = counter == 1 ? "try" : "tries";
         String winningMsg = String.format("You got it in %d %s", counter, tryText);
-        return guessedNumber == getRandomNumber() ? winningMsg : "You didn't get it";
+        String response = null;
+        if (counter == 4 && guessedNumber != getRandomNumber()) {
+            response =  String.format("You didn't get it and you've had %d %s. Game over.", counter, tryText);
+        } else if (counter > 4) {
+            response = "Sorry, you are limited to only 4 tries. Game over.";
+        } else {
+            response =  guessedNumber == getRandomNumber() ? winningMsg : "You didn't get it";
+        }
+        return response;
     }
 
     public int getRandomNumber() {
