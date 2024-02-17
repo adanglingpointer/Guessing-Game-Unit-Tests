@@ -26,14 +26,14 @@ public class GuessingGameTest {
     @Test
     public void testOneWrongNegGuessSituation() {
         String message = game.guess(-5);
-        assertEquals("You didn't get it", message);
+        assertEquals("You didn't get it - you're too low", message);
     }
 
     @Test
     public void testOneWrongPosGuessSituation() {
         int randomNum = game.getRandomNumber();
         String message = game.guess(randomNum + 1);
-        assertEquals("You didn't get it", message);
+        assertEquals("You didn't get it - you're too high", message);
     }
 
     @RepeatedTest(10)
