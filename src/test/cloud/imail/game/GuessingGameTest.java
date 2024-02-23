@@ -5,6 +5,7 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GuessingGameTest {
 
@@ -68,8 +69,6 @@ public class GuessingGameTest {
         game.guess(-3);
         game.guess(-3);
         game.guess(-3);
-        game.guess(-3);
-        game.guess(-3);
         makeThreeWrongGuesses();
         String message = game.guess(-3);
         assertEquals("Sorry, you are limited to only 4 tries. Game over.", message);
@@ -95,6 +94,8 @@ public class GuessingGameTest {
         game.guess(-3);
         int correctAnswer = game.getRandomNumber();
         String message = game.guess(correctAnswer);
+        assertTrue(message.contains("3"), "Should indicate 3 tries");
+        assertTrue(message.contains("You got it"), "Should indicate that we got the right number");
         assertEquals("You got it in 3 tries", message);
     }
 

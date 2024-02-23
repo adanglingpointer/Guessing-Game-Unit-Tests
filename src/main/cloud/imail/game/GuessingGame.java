@@ -16,15 +16,15 @@ public class GuessingGame {
         } else if (counter > 4) {
             response = "Sorry, you are limited to only 4 tries. Game over.";
         } else {
-            String tooLowText = null;
+            String tooHighLowText = null;
             if (guessedNumber < getRandomNumber()) {
-                tooLowText = "- you're too low";
+                tooHighLowText = "- you're too low";
             } else if (guessedNumber > getRandomNumber()) {
-
+                tooHighLowText = "- you're too high";
             } else {
-                tooLowText = "";
+                tooHighLowText = "";
             }
-            String loseText = String.format("You didn't get it %s", tooLowText).trim();
+            String loseText = String.format("You didn't get it %s", tooHighLowText).trim();
             response =  guessedNumber == getRandomNumber() ? winningMsg : loseText;
         }
         return response;
@@ -32,5 +32,21 @@ public class GuessingGame {
 
     public int getRandomNumber() {
         return randomNumber;
+    }
+
+    public static void main(String[] args) {
+        GuessingGame game = new GuessingGame();
+        boolean loopShouldContinue = true;
+        do {
+            String input = System.console().readLine("Enter a number: ");
+            if ("q".equals(input)) {
+                return;
+            }
+            String output = game.guess(Integer.parseInt(input));
+            System.out.println(output);
+            if (output.contains("You got it") || output.contains("over")) {
+                loopShouldContinue = false;
+            }
+        } while (loopShouldContinue);
     }
 }
